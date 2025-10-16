@@ -1,0 +1,188 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+  background-color: #f0f0f0;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+}
+
+.left-panel {
+  width: 350px;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  height: 100vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.left-panel > h1,
+.left-panel > div {
+  width: 100%;
+  text-align: center;
+}
+
+.right-panel {
+  flex-grow: 1;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#board-container {
+  position: relative;
+  width: 1000px;
+  height: 700px;
+  background-color: #d2b48c;
+  border: 2px solid #8b4513;
+  margin: auto;
+}
+
+.city {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: #555;
+  border-radius: 50%;
+  border: 2px solid white;
+  color: white;
+  text-align: center;
+  font-size: 10px;
+  line-height: 20px;
+  cursor: pointer;
+  z-index: 2;
+}
+
+.city-name {
+  position: absolute;
+  transform: translate(-50%, -150%);
+  background-color: rgba(255, 255, 255, 0.8);
+  padding: 2px 5px;
+  border-radius: 3px;
+  font-size: 12px;
+  font-weight: bold;
+  color: black;
+}
+
+.route {
+  position: absolute;
+  height: 10px;
+  transform-origin: 0 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  z-index: 1;
+}
+.route:hover {
+  border: 2px dashed yellow;
+}
+.route-segment {
+  height: 100%;
+  flex-grow: 1;
+  margin: 0 2px;
+}
+
+#players-info,
+#my-hand,
+#card-decks {
+  margin-top: 20px;
+}
+
+#player-list {
+  list-style: none;
+  padding: 0;
+}
+#player-list li {
+  padding: 5px;
+  border-radius: 3px;
+  margin-bottom: 5px;
+}
+.active-turn {
+  font-weight: bold;
+  border: 2px solid gold;
+}
+
+.card {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 90px;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 5px;
+  font-size: 11px;
+  font-weight: bold;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  cursor: pointer;
+}
+.card.selected {
+  border: 3px solid #00f;
+  box-shadow: 0 0 10px #00f;
+}
+
+#visible-cards,
+#my-cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.deck {
+  width: 65px;
+  height: 95px;
+  border: 2px dashed #333;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: #ccc;
+  margin: 5px;
+}
+
+.card-multicolor {
+  background: linear-gradient(
+    to bottom right,
+    red,
+    orange,
+    yellow,
+    green,
+    blue,
+    indigo,
+    violet
+  );
+}
+
+.error {
+  color: red;
+  font-weight: bold;
+}
+
+#winner-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 20px 0;
+  background-color: gold;
+  color: black;
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+  z-index: 100;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  border-bottom: 4px solid #b8860b;
+}
+
+.hidden {
+  display: none;
+}

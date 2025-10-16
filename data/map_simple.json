@@ -1,0 +1,26 @@
+{
+    "cities": [
+        {"name": "Seattle", "x": 10, "y": 10},
+        {"name": "Portland", "x": 12, "y": 20},
+        {"name": "SanFrancisco", "x": 15, "y": 35},
+        {"name": "LosAngeles", "x": 18, "y": 45},
+        {"name": "LasVegas", "x": 28, "y": 38},
+        {"name": "SaltLakeCity", "x": 35, "y": 30},
+        {"name": "Denver", "x": 48, "y": 28},
+        {"name": "Phoenix", "x": 35, "y": 45},
+        {"name": "Albuquerque", "x": 50, "y": 40},
+        {"name": "ElPaso", "x": 60, "y": 47}
+    ],
+    "routes": [
+        {"a": "Seattle", "b": "Portland", "color": "GRAY", "length": 1},
+        {"a": "Portland", "b": "SanFrancisco", "color": "PURPLE", "length": 3},
+        {"a": "SanFrancisco", "b": "LosAngeles", "color": "YELLOW", "length": 3},
+        {"a": "LosAngeles", "b": "LasVegas", "color": "WHITE", "length": 2},
+        {"a": "LasVegas", "b": "SaltLakeCity", "color": "ORANGE", "length": 3},
+        {"a": "SaltLakeCity", "b": "Denver", "color": "RED", "length": 3},
+        {"a": "LosAngeles", "b": "Phoenix", "color": "GRAY", "length": 3},
+        {"a": "Phoenix", "b": "Albuquerque", "color": "BLUE", "length": 3},
+        {"a": "Albuquerque", "b": "ElPaso", "color": "BLACK", "length": 2}
+    ]
+}
+

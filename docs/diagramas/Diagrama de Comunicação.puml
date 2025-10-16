@@ -1,0 +1,116 @@
+@startuml Diagrama de Comunicação
+title Diagrama de Comunicação - Ticket to Ride\n**Cenário: Reivindicar Rota**
+
+' Configurações visuais
+skinparam backgroundColor #FFFEF0
+skinparam defaultFontName Arial
+skinparam defaultFontSize 11
+skinparam shadowing false
+skinparam objectBorderColor #2C3E50
+skinparam objectBackgroundColor #ECF0F1
+skinparam arrowColor #3498DB
+skinparam arrowFontSize 10
+skinparam arrowFontColor #2C3E50
+skinparam noteBorderColor #E67E22
+skinparam noteBackgroundColor #FFF5E6
+skinparam noteFontSize 10
+
+' ===== OBJETOS DO SISTEMA =====
+object ":JogadorAtivo" as jogadorAtivo #FFE5CC
+object "j:Jogador" as jogador #D5E8F7
+object "t:Tabuleiro" as tabuleiro #E8F5E9
+object "r:Rota" as rota #FFF9C4
+object "b:Baralho" as baralho #F3E5F5
+object "c1:Cidade" as cidade1 #FFE0B2
+object "c2:Cidade" as cidade2 #FFE0B2
+
+' ===== ESTRUTURA DE RELACIONAMENTOS =====
+' Relacionamentos principais
+jogadorAtivo -- jogador
+jogador -- tabuleiro
+jogador -- rota
+jogador -- baralho
+
+' Relacionamentos das cidades
+rota -- cidade1
+rota -- cidade2
+
+' Relacionamento tabuleiro-rota
+tabuleiro -- rota
+
+' ===== CONTEXTO DO CENÁRIO =====
+note top of jogadorAtivo #FFEBCD
+  <b>🎮 Cenário: Reivindicar Rota</b>
+  ──────────────────────
+  O jogador ativo tenta reivindicar
+  uma rota no tabuleiro usando
+  suas cartas de vagão
+end note
+
+' ===== FLUXO DE MENSAGENS =====
+
+' 1. Solicitação inicial
+jogadorAtivo -[#E74C3C]-> jogador : <b>1:</b> reivindicarRota(r, cartas)
+
+' 1.1 - 1.2. Verificação de disponibilidade
+jogador -[#3498DB]-> tabuleiro : <b>1.1:</b> verificarDisponibilidade(r)
+tabuleiro -[#3498DB]-> rota : <b>1.1.1:</b> getDono()
+rota -[#95A5A6,dashed]-> tabuleiro : <b>1.1.2:</b> retornar(dono)
+tabuleiro -[#27AE60,dashed]-> jogador : <b>1.2</b> [se disponível]: confirmar()
+
+' 1.3 - 1.5. Reivindicação e cálculo
+jogador -[#9B59B6]-> rota : <b>1.3</b> [se disponível]: setDono(j)
+jogador -[#9B59B6]-> rota : <b>1.4:</b> calcularPontos()
+rota -[#95A5A6,dashed]-> jogador : <b>1.5:</b> retornar(pontos)
+
+' 1.6 - 1.7. Atualização interna
+jogador -[#16A085]-> jogador : <b>1.6:</b> atualizarPontos(pontos)
+jogador -[#16A085]-> jogador : <b>1.7:</b> removerCartas(cartas)
+
+' 1.8. Descarte de cartas
+jogador -[#E67E22]-> baralho : <b>1.8:</b> descartar(cartas)
+
+' 1.9. Notificação de sucesso
+jogador -[#27AE60,dashed]-> jogadorAtivo : <b>1.9:</b> notificar(sucesso)
+
+' ===== NOTAS EXPLICATIVAS =====
+
+note bottom of rota #FFF3CD
+  <b>⚠️ Condição de Reivindicação</b>
+  ──────────────────────────
+  A rota só pode ser reivindicada
+  se <b>getDono()</b> retornar <b>null</b>
+  
+  Caso contrário, a rota já está
+  ocupada por outro jogador
+end note
+
+note right of baralho #E8F4F8
+  <b>📦 Descarte</b>
+  ─────────────
+  Cartas usadas vão
+  para a pilha de
+  descarte do baralho
+end note
+
+note left of tabuleiro #E8F5E9
+  <b>🗺️ Verificação</b>
+  ───────────────
+  O tabuleiro centraliza
+  a verificação de
+  disponibilidade
+  das rotas
+end note
+
+legend bottom
+  <b>Legenda de Cores:</b>
+  <color:#E74C3C>━━━</color> Solicitação inicial
+  <color:#3498DB>━━━</color> Verificação
+  <color:#9B59B6>━━━</color> Reivindicação
+  <color:#16A085>━━━</color> Atualização interna
+  <color:#E67E22>━━━</color> Descarte
+  <color:#27AE60>┄┄┄</color> Retorno/Confirmação
+  <color:#95A5A6>┄┄┄</color> Retorno de dados
+end legend
+
+@enduml

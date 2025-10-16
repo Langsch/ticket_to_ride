@@ -1,0 +1,85 @@
+@startuml Diagrama de classes
+skinparam classAttributeIconSize 0
+hide empty members
+title Diagrama de Classes - Ticket to Ride
+
+enum Cor {
+  VERMELHO
+  AZUL
+  VERDE
+  AMARELO
+  PRETO
+  BRANCO
+  ROXO
+  LARANJA
+  LOCOMOTIVA
+  CINZA
+}
+
+class Tabuleiro {
+  + getRota(cidadeA: Cidade, cidadeB: Cidade): Rota
+}
+
+class Cidade {
+  - nome: String
+}
+
+class Rota {
+  - comprimento: int
+  - cor: Cor
+  - locomotivasNecessarias: int
+  - ehDupla: boolean
+  - dono: Jogador
+  + calcularPontos(): int
+  + getDono(): Jogador
+  + setDono(jogador: Jogador)
+}
+
+class Jogador {
+  - nome: String
+  - cor: Cor
+  - pontos: int
+  - pecasVagao: int
+  + comprarCartaVagao(carta: CartaVagao)
+  + comprarCartaDestino(cartas: CartaDestino[])
+  + reivindicarRota(rota: Rota, cartas: CartaVagao[])
+  + calcularPontosRotas(): int
+  + verificarObjetivos(): int
+  - atualizarPontos(pontos: int)
+}
+
+abstract class Carta {
+  + descrever(): String
+}
+
+class CartaVagao extends Carta {
+  - cor: Cor
+}
+
+class CartaDestino extends Carta {
+  - origem: Cidade
+  - destino: Cidade
+  - pontos: int
+}
+
+class Baralho {
+  - cartas: Carta[*]
+  - descarte: Carta[*]
+  + embaralhar()
+  + comprarCarta(): Carta
+  + descartar(carta: Carta)
+}
+
+' Relacionamentos
+Tabuleiro "1" -->  Cidade
+Tabuleiro "1" -->  Rota
+Rota <--> Cidade : conecta
+Rota --> Jogador : reivindicada por
+Jogador o--> "*" CartaVagao
+Jogador o--> "*" CartaDestino
+Baralho o--> "*" Carta
+Jogador --> Cor
+Rota --> Cor
+CartaVagao --> Cor
+
+@enduml

@@ -1,0 +1,51 @@
+@startuml
+title Diagrama de Sequência Melhorado - Reivindicar Rota
+
+actor "Jogador Ativo" as jogadorAtivo
+participant ":Jogador" as jogador
+participant ":Rota" as rota
+participant ":Baralho" as baralho
+
+jogadorAtivo -> jogador : 1: reivindicarRota(rota, cartas)
+activate jogador
+
+' O jogador primeiro verifica se a rota tem um dono
+jogador -> rota : 2: getDono()
+activate rota
+rota --> jogador : 3: dono (pode ser nulo)
+deactivate rota
+
+alt dono == null [Rota está livre]
+
+    ' Ação de definir o jogador atual como dono da rota
+    jogador ->> rota : 4: setDono(self)
+    activate rota
+    deactivate rota
+
+    ' O fluxo original continua...
+    jogador -> rota : 5: calcularPontos()
+    activate rota
+    rota --> jogador : 6: pontosDaRota
+    deactivate rota
+
+    jogador -> jogador : 7: atualizarPontos(pontosDaRota)
+    activate jogador
+    deactivate jogador
+
+
+    jogador ->> baralho : 8: descartar(cartas)
+    activate baralho
+    deactivate baralho
+
+    jogador --> jogadorAtivo : 9: notificar("Rota reivindicada com sucesso!")
+
+else Rota já ocupada
+
+    ' Ação falha e o jogador é notificado
+    jogador --> jogadorAtivo : 9: notificar("Erro: Rota já está ocupada.")
+
+end
+
+deactivate jogador
+
+@enduml
