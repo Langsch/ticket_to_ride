@@ -73,9 +73,9 @@ Os diagramas UML completos estão disponíveis em `docs/diagramas/`:
 
 ## 👥 Autores
 
-Rafael Valverde
-Paulo Carrano
-Jansen Alves
-Rafael Langsch
+Rafael Valverde  
+Paulo Carrano  
+Jansen Alves  
+Rafael Langsch  
 
 ---
