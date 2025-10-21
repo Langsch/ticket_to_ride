@@ -29,7 +29,6 @@ class Rota {
   - cor: Cor
   - locomotivasNecessarias: int
   - ehDupla: boolean
-  - dono: Jogador
   + calcularPontos(): int
   + getDono(): Jogador
   + setDono(jogador: Jogador)
@@ -37,7 +36,6 @@ class Rota {
 
 class Jogador {
   - nome: String
-  - cor: Cor
   - pontos: int
   - pecasVagao: int
   + comprarCartaVagao(carta: CartaVagao)
@@ -74,9 +72,11 @@ class Baralho {
 Tabuleiro "1" -->  Cidade
 Tabuleiro "1" -->  Rota
 Rota <--> Cidade : conecta
-Rota --> Jogador : reivindicada por
+Rota <-- Jogador
+Baralho <-- Jogador
 Jogador o--> "*" CartaVagao
 Jogador o--> "*" CartaDestino
+Baralho o--> "*" Carta
 Baralho o--> "*" Carta
 Jogador --> Cor
 Rota --> Cor
