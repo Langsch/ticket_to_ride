@@ -28,7 +28,6 @@ class Rota {
   - comprimento: int
   - cor: Cor
   - locomotivasNecessarias: int
-  - ehDupla: boolean
   + calcularPontos(): int
   + getDono(): Jogador
   + setDono(jogador: Jogador)
