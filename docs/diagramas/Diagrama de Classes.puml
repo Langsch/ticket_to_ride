@@ -18,6 +18,7 @@ enum Cor {
 
 class Tabuleiro {
   + getRota(cidadeA: Cidade, cidadeB: Cidade): Rota
+  - criarMapa() 
 }
 
 class Cidade {
